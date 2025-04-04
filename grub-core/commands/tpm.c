@@ -36,6 +36,8 @@ grub_tpm_verify_init (grub_file_t io,
 {
   *context = io->name;
   *flags |= GRUB_VERIFY_FLAGS_SINGLE_CHUNK;
+  if (grub_strncmp ((char *) io->name, "grubenv", 7) == 0)
+    *flags = GRUB_VERIFY_FLAGS_SKIP_VERIFICATION;
   return GRUB_ERR_NONE;
 }
 
